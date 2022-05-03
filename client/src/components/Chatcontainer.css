@@ -1,0 +1,37 @@
+.chat-container {
+  background-color: red;
+  min-height: calc(100vh - 80px);
+}
+
+.chat-container h1 {
+  margin: 0;
+}
+
+.messageFeild {
+  position: fixed;
+  bottom: 0;
+  background-color: #5c9ead;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+}
+
+input {
+  width: 80%;
+  text-overflow: auto;
+  word-wrap: break-word;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  border: none;
+  padding: 5px;
+}
+button {
+  background-color: #e39774;
+  color: white;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: none;
+  padding: 5px;
+}

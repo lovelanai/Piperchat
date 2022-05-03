@@ -1,0 +1,27 @@
+.createUserContainer {
+  display: flex;
+
+  align-items: center;
+  flex-direction: column;
+  min-height: calc(100vh - 80px);
+}
+
+.createUserContainer h1 {
+  padding-top: 5rem;
+}
+
+.createUserForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.createUserForm input {
+  margin: 1rem;
+  background-color: #eeeeee;
+}
+
+.createUserForm button {
+  margin: 1rem;
+}

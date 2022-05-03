@@ -1,0 +1,21 @@
+* {
+  font-family: Arial, Helvetica;
+  font-weight: 300;
+}
+.Room-nav-container {
+  width: 100%;
+}
+.containerRooms {
+  display: flex;
+  flex-direction: column;
+  justify-self: left;
+  min-height: calc(100vh - 80px);
+  background-color: #eeeeee;
+}
+
+.rooms {
+  background-color: #5c9ead;
+  color: white;
+  padding: 1rem;
+  text-align: left;
+}
