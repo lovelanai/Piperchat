@@ -1,58 +1,53 @@
-const express = require("express");
-const http = require("http").Server(express);
-const io = require("socket.io")(http);
-const app = express();
-const colors = require("colors");
+import { Server } from "socket.io";
 
-const port = process.env.PORT || 5500;
-
-io.use((socket, next) => {});
+const io = new Server();
 
 io.on("connection", (socket) => {
-  socket.on("chat message", (msg) => {
-    io.emit("chat message", msg);
-  });
-});
+  console.log("a user connected");
 
-http.listen(port, () => {
-  console.log(
-    `Socket.IO server running at http://localhost:${port}/`.bgMagenta
-  );
+  socket.emit("welcome", "Welcome to our chat app!");
+
+  socket.on("message", (message) => {
+    // io.emit("message", message);
+    console.log(message)
+  });
+
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
 });
 
 io.listen(5500);
 
-/*  
-
-Beskrivning av olika meddelanden ifrån socket eller io:
+// Beskrivning av olika meddelanden ifrån socket eller io:
 
 
-socket.emit('message', "this is a test"); //sending to sender-client only
+// socket.emit('message', "this is a test"); //sending to sender-client only
 
-socket.broadcast.emit('message', "this is a test"); //sending to all clients except sender
+// socket.broadcast.emit('message', "this is a test"); //sending to all clients except sender
 
-socket.broadcast.to('game').emit('message', 'nice game'); //sending to all clients in 'game' room(channel) except sender
+// socket.broadcast.to('game').emit('message', 'nice game'); //sending to all clients in 'game' room(channel) except sender
 
-socket.to('game').emit('message', 'enjoy the game'); //sending to sender client, only if they are in 'game' room(channel)
+// socket.to('game').emit('message', 'enjoy the game'); //sending to sender client, only if they are in 'game' room(channel)
 
-socket.broadcast.to(socketid).emit('message', 'for your eyes only'); //sending to individual socketid
+// socket.broadcast.to(socketid).emit('message', 'for your eyes only'); //sending to individual socketid
 
-io.emit('message', "this is a test"); //sending to all clients, include sender
+// io.emit('message', "this is a test"); //sending to all clients, include sender
 
-io.in('game').emit('message', 'cool game'); //sending to all clients in 'game' room(channel), include sender
+// io.in('game').emit('message', 'cool game'); //sending to all clients in 'game' room(channel), include sender
 
-io.of('myNamespace').emit('message', 'gg'); //sending to all clients in namespace 'myNamespace', include sender
+// io.of('myNamespace').emit('message', 'gg'); //sending to all clients in namespace 'myNamespace', include sender
 
-socket.emit(); //send to all connected clients
+// socket.emit(); //send to all connected clients
 
-socket.broadcast.emit(); //send to all connected clients except the one that sent the message
+// socket.broadcast.emit(); //send to all connected clients except the one that sent the message
 
-socket.on(); //event listener, can be called on client to execute on server
+// socket.on(); //event listener, can be called on client to execute on server
 
-io.sockets.socket(); //for emiting to specific clients
+// io.sockets.socket(); //for emiting to specific clients
 
-io.sockets.emit(); //send to all connected clients (same as socket.emit)
+// io.sockets.emit(); //send to all connected clients (same as socket.emit)
 
-io.sockets.on() ; //initial connection from a client.
+// io.sockets.on() ; //initial connection from a client.
 
-*/
+// */
