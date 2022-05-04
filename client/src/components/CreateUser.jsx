@@ -1,6 +1,7 @@
 import "./CreateUser.css";
 import { Link } from "react-router-dom";
 import CreateRoom from "./CreateRoom";
+import { io, Socket } from "socket.io-client";
 
 function CreateUser() {
   return (
