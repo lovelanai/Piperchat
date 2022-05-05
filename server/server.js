@@ -20,7 +20,11 @@ io.on("connection", (socket) => {
     socket.emit("connected", socket.data.nickname);
 
     socket.on("message", (message) => {
-      console.log(message);
+      socket.broadcast.emit("message", {
+        message: message,
+        from: socket.data.nickname,
+      });
+      console.log(message, "serverside sucks");
     });
 
     socket.on("disconnect", () => {

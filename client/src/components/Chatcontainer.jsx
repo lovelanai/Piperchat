@@ -20,22 +20,23 @@ function Chatcontainer() {
 
     setText(text);
 
-    let newText = {
-      user,
-      text,
-    };
-    console.log(newText);
-
-    socket.emit("message", newText);
-
+    console.log(text);
     setText("");
+    socket.emit("message", text);
   };
 
-  socket.on("message", (message, nickname) => {});
+  // const test = (e) => {
+  //   e.preventDefault();
+  //   socket.on("message", (messageData) => {
+  //     console.log("FROM SERVER", messageData);
+  //   });
+  // };
 
   useEffect(() => {
-    socket.emit("message", "Funkar");
-  }, []);
+    socket.on("message", (messageData) => {
+      console.log("FROM SERVER", messageData);
+    });
+  }, [text]);
 
   return (
     <div className="chat-container">
@@ -60,9 +61,9 @@ function Chatcontainer() {
               onChange={(e) => setText(e.target.value)}
             />
           </label>
-          <button onClick={HandleSubmit} type="submit">
-            send
-          </button>
+          <button onClick={HandleSubmit}>send</button>
+
+          {/* <button onClick={test}>test</button> */}
         </form>
       </div>
     </div>
