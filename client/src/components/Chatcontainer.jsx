@@ -1,21 +1,11 @@
-import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../context/ContextUser";
 import "./Chatcontainer.css";
 
 function Chatcontainer() {
   const [value, setValue] = useState("");
   const [text, setText] = useState([]);
-  const socket = io();
-
-  socket.on("welcome", (message) => {
-    console.log(message);
-  });
-
-  socket.on("connect", () => {
-    console.log("kopplad");
-
-    // socket.emit("message");
-  });
+  const { socket, user } = useContext(UserContext);
 
   function RandomID() {
     let id = Math.random() * 1.98;
@@ -28,8 +18,12 @@ function Chatcontainer() {
 
   const HandleSubmit = (e) => {
     e.preventDefault();
-    console.log(value);
-    socket.emit("message", value);
+    let text = {
+      name: user,
+      message: value,
+    };
+    console.log(text);
+    socket.emit("message", text);
   };
 
   useEffect(() => {

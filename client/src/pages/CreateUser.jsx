@@ -1,44 +1,44 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { io } from "socket.io-client";
+
 import { UserContext } from "../context/ContextUser";
 import "./CreateUser.css";
 
 function CreateUser() {
-  const { user, setUser, ConnectSocket } = useContext(UserContext);
-  const socket = io({ autoConnect: false });
+  const { user, setUser, socket } = useContext(UserContext);
+  // let nickname = user.value;
 
-  function setUserName() {
-    socket.auth = { nickname: user.value };
+  const setUserName = (e) => {
     setUser(user);
     console.log(user);
-    ConnectSocket();
-  }
-
-  const usernameOnChange = (e) => {
-    setUser(e.target.value);
   };
+
+  socket.on("connected", (nickname) => {
+    console.log("Connected: ", nickname);
+    nickname = nickname;
+  });
 
   return (
     <div className="createUserContainer">
       <h1>Skapa användare</h1>
-      <div className="createUserForm">
+      <form className="createUserForm">
         <div>
           <input
-            value={user}
-            onChange={usernameOnChange}
+            onChange={(e) => setUser(e.target.value)}
             className="customizedInput"
             placeholder="Ex: Erlich Bachman"
+            type="text"
+            value={user}
           ></input>
         </div>
         <div>
           <Link to="/Lobby">
-            <button onSubmit={setUserName} className="customizedButton">
-              Start Chatting
+            <button onClick={setUserName} className="customizedButton">
+              Join chat
             </button>
           </Link>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

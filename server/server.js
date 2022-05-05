@@ -4,7 +4,7 @@ const io = new Server();
 
 io.use((socket, next) => {
   const nickname = socket.handshake.auth.nickname;
-  if (!nickname || nickname.length < 3) {
+  if (!nickname || nickname.length < 0) {
     return next(new Error("Invalid nickname"));
   }
   socket.data.nickname = nickname;
