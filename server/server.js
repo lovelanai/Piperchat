@@ -2,25 +2,36 @@ import { Server } from "socket.io";
 
 const io = new Server();
 
+io.use((socket, next) => {
+  const nickname = socket.handshake.auth.nickname;
+  if (!nickname || nickname.length < 3) {
+    return next(new Error("Invalid nickname"));
+  }
+  socket.data.nickname = nickname;
+  next();
+});
+
 io.on("connection", (socket) => {
   console.log("a user connected");
 
   socket.emit("welcome", "Welcome to our chat app!");
 
-  socket.on("message", (message) => {
-    // io.emit("message", message);
-    console.log(message)
-  });
+  if (socket.data.nickname) {
+    socket.emit("connected", socket.data.nickname);
 
-  socket.on("disconnect", () => {
-    console.log("user disconnected");
-  });
+    socket.on("message", (message) => {
+      console.log(message);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("user disconnected");
+    });
+  }
 });
 
 io.listen(5500);
 
 // Beskrivning av olika meddelanden ifrån socket eller io:
-
 
 // socket.emit('message', "this is a test"); //sending to sender-client only
 

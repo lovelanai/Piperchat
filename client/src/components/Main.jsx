@@ -1,9 +1,6 @@
-import CreateUser from "./CreateUser";
-import Roomnavbar from "./Roomnavbar";
-import Chatcontainer from "./Chatcontainer";
-import { Routes, Route } from "react-router-dom";
-import Lobby from "./Lobby";
-import CreateRoom from "./CreateRoom";
+import { Route, Routes } from "react-router-dom";
+import CreateUser from "../pages/CreateUser";
+import Lobby from "../pages/Lobby";
 import "./Main.css";
 
 function Main() {

@@ -1,18 +1,21 @@
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 import "./Chatcontainer.css";
-import { io, Socket } from "socket.io-client";
-import { useState } from "react";
-import { useEffect } from "react";
 
 function Chatcontainer() {
   const [value, setValue] = useState("");
   const [text, setText] = useState([]);
-  const socket = io({ autoConnect: false });
+  const socket = io();
 
-  function connectSocket(param) {
-    socket.emit("message", param);
-    console.log(value);
-    socket.connect();
-  }
+  socket.on("welcome", (message) => {
+    console.log(message);
+  });
+
+  socket.on("connect", () => {
+    console.log("kopplad");
+
+    // socket.emit("message");
+  });
 
   function RandomID() {
     let id = Math.random() * 1.98;
@@ -23,31 +26,15 @@ function Chatcontainer() {
     setValue(e.target.value);
   };
 
-  // const onSubmiText = (e) => {
-  //   e.preventDefault();
-  //   console.log("you sent a message");
-  //   // HandleSubmit();
-  // };
-
   const HandleSubmit = (e) => {
     e.preventDefault();
     console.log(value);
-    let message = {
-      user: "",
-      message: value,
-      id: RandomID,
-    };
-    text.push(message);
-    connectSocket(message);
-    console.log(message);
-    setText(text);
+    socket.emit("message", value);
   };
 
-  // let mesages = JSON.parse(localStorage.getItem("messages"));
-
   useEffect(() => {
-    localStorage.setItem("Messages", JSON.stringify(text));
-  }, [text]);
+    socket.emit("message", "Funkar");
+  }, []);
 
   return (
     <div className="chat-container">
