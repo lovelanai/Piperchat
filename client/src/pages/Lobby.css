@@ -1,8 +1,8 @@
 .lobby-container {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  height: 100%;
+  min-height: calc(100vh - 80px);
+  width: 100vw;
 }
 
 .roomNavBar {
@@ -11,4 +11,67 @@
 
 .chatContainer {
   width: 85%;
+}
+
+
+.createRoomContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+ 
+}
+
+.createRoom {
+  background-color: #5c9ead;
+  color: white;
+    height: 75%;
+    width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+.customizedInput {
+  padding: 1.2rem 2rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+}
+
+.customizedButton {
+  background-color: #02776E;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.customizedButton:disabled {
+  background-color: #696969;
+
+
+}
+
+.createRoom input {
+  margin: 4rem;
+  width: 30%;
+}
+
+.createRoom button {
+  width: 25%;
+}
+
+.createRoomButton{
+  display: flex;
+  width:100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }

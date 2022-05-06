@@ -5,18 +5,19 @@ import { UserContext } from "../context/ContextUser";
 import "./CreateUser.css";
 
 function CreateUser() {
-  const { user, setUser, socket } = useContext(UserContext);
-  // let nickname = user.value;
+  const { user, setUser, socket, setStartServer } = useContext(UserContext);
 
-  const setUserName = (e) => {
-    setUser(user);
-    console.log(user);
+  const startChat = (e) => {
+    if (user.length <= 0) {
+      e.preventDefault();
+    } else {
+      setUser(user);
+    }
+    setStartServer(true);
+    socket.on("connected", (nickname) => {
+      console.log("Connected: ", nickname);
+    });
   };
-
-  socket.on("connected", (nickname) => {
-    console.log("Connected: ", nickname);
-    nickname = nickname;
-  });
 
   return (
     <div className="createUserContainer">
@@ -33,7 +34,11 @@ function CreateUser() {
         </div>
         <div>
           <Link to="/Lobby">
-            <button onClick={setUserName} className="customizedButton">
+            <button
+              disabled={user.length <= 0}
+              onClick={startChat}
+              className="customizedButton"
+            >
               Join chat
             </button>
           </Link>

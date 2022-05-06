@@ -17,13 +17,20 @@
 }
 
 .customizedButton {
-  background-color: #5c9ead;
+  background-color: #02776E;
   color: white;
   padding: 0.8rem 2rem;
   border-radius: 10px;
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.customizedButton:disabled {
+  background-color: #696969;
+
+
 }
 
 .createRoom input {

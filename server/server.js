@@ -1,12 +1,13 @@
 import { Server } from "socket.io";
 
+
 const io = new Server();
 
 io.use((socket, next) => {
   const nickname = socket.handshake.auth.nickname;
-  if (!nickname || nickname.length < 0) {
-    return next(new Error("Invalid nickname"));
-  }
+   if (!nickname || nickname.length < 0) {
+     return next(new Error("Invalid nickname"));
+   }
   socket.data.nickname = nickname;
   next();
 });
@@ -16,22 +17,26 @@ io.on("connection", (socket) => {
 
   socket.emit("welcome", "Welcome to our chat app!");
 
-  if (socket.data.nickname) {
+   if (socket.data.nickname) {
     socket.emit("connected", socket.data.nickname);
-
-    socket.on("message", (message) => {
-      socket.broadcast.emit("message", {
-        message: message,
-        from: socket.data.nickname,
+    
+    // send message and nickname to client
+    socket.on("message", (chatMessage, to) => {
+      io.emit("message", {
+        chatMessage: chatMessage,
+        from: socket.data.nickname
       });
-      console.log(message, "serverside sucks");
+      console.log(chatMessage);
     });
 
+    
     socket.on("disconnect", () => {
       console.log("user disconnected");
-    });
-  }
-});
+    });  
+  }  
+});  
+
+
 
 io.listen(5500);
 

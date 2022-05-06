@@ -1,11 +1,14 @@
 .header {
-  background-color: #e39774;
+  background-color: #02776E;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 8rem;
 }
 
 .header a {
   text-decoration: none;
-  color: black;
+  color: white;
 }
+
+

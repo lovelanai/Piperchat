@@ -6,6 +6,7 @@ function Roomnavbar() {
       <div className="containerRooms">
         <div className="rooms">bolibompa</div>
         <div className="rooms">LOL XD random</div>
+        <div className="newRoom">Skapa nytt rum +</div>
       </div>
     </div>
   );

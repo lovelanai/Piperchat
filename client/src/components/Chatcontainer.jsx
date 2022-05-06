@@ -3,64 +3,46 @@ import { UserContext } from "../context/ContextUser";
 import "./Chatcontainer.css";
 
 function Chatcontainer() {
-  const [text, setText] = useState("");
+  const [message, setMessage] = useState("");
   const { socket, user } = useContext(UserContext);
-
-  function RandomID() {
-    let id = Math.random() * 1.98;
-    return id;
-  }
-
-  // const valueOnChange = (e) => {
-  //   setValue(e.target.value);
-  // };
 
   const HandleSubmit = (e) => {
     e.preventDefault();
-
-    setText(text);
-
-    console.log(text);
-    setText("");
-    socket.emit("message", text);
+    if (message.length) {
+      console.log(message);
+      socket.emit("message", message);
+      setMessage("");
+    } else {
+      return;
+    }
   };
-
-  // const test = (e) => {
-  //   e.preventDefault();
-  //   socket.on("message", (messageData) => {
-  //     console.log("FROM SERVER", messageData);
-  //   });
-  // };
 
   useEffect(() => {
     socket.on("message", (messageData) => {
       console.log("FROM SERVER", messageData);
     });
-  }, [text]);
+  }, []);
 
   return (
     <div className="chat-container">
       <h1>Messages</h1>
-      Här ska mappningen vara senare
-      {/* {text.map((text) => (
-        <div key={text.id}>
+      du måste joina ett rum för att chatta
+      {/* {message.map((message) => (
+        <div key={message.id}>
           <h2>
-            <span style={{ paddingRight: "1rem" }}>{text.name}:</span>
-            <span>{text.message}</span>
+            <span style={{ paddingRight: "1rem" }}>{message.name}:</span>
+            <span>{message.message}</span>
           </h2>
         </div>
       ))} */}
       <div className="messageFeild">
-        <form>
-          <label>
-            text message
-            <input
-              value={text}
-              type="text"
-              name="message"
-              onChange={(e) => setText(e.target.value)}
-            />
-          </label>
+        <form className="chatInput">
+          <input
+            value={message}
+            type="message"
+            name="message"
+            onChange={(e) => setMessage(e.target.value)}
+          />
           <button onClick={HandleSubmit}>send</button>
 
           {/* <button onClick={test}>test</button> */}
