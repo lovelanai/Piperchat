@@ -1,9 +1,9 @@
-# StrangerDanger
+# Piperchat
 
 Chatroom
 
 
-[Link to repo](https://github.com/matsegard/StrangerDanger)
+[Link to repo](https://github.com/lovelanai/Piperchat)
 
 ## Initiate project 👨‍💻
 
