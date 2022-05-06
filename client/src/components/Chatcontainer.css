@@ -1,6 +1,6 @@
 .chat-container {
 
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 144px);
 }
 
 .chat-container h1 {
@@ -50,4 +50,5 @@
   display: flex;
   align-items: center;
   width: 100%;
+  
 }

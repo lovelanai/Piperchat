@@ -1,7 +1,7 @@
 .lobby-container {
   display: flex;
   flex-direction: row;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 144px);
   width: 100vw;
 }
 
@@ -16,7 +16,6 @@
 
 .createRoomContainer{
   display: flex;
-  align-items: center;
   justify-content: center;
   width: 100%;
 
@@ -24,7 +23,7 @@
 }
 
 .createRoom {
-  background-color: #5c9ead;
+  background-color: #15353C;
   color: white;
     height: 75%;
     width: 50%;
@@ -43,7 +42,7 @@
 }
 
 .customizedButton {
-  background-color: #02776E;
+background-color: #02776E;
   color: white;
   padding: 0.8rem 2rem;
   border-radius: 10px;
@@ -54,6 +53,7 @@
 }
 
 .customizedButton:disabled {
+  color: rgb(164, 164, 164);
   background-color: #696969;
 
 

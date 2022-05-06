@@ -5,9 +5,11 @@ import piedpiper from "../assets/img/piedpiper.png";
 function Header() {
   return (
     <div className="header">
-      <div style={{ position: "relative" }}>
-        <Link to="/">pied piper</Link>
-      </div>
+      <Link to="/">
+        <div>
+          <img src={piedpiper} alt="logo" />
+        </div>
+      </Link>
     </div>
   );
 }

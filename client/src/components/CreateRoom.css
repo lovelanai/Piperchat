@@ -1,12 +1,12 @@
 .createRoom {
-  background-color: #5c9ead;
+  background-color: #15353C;
+  padding: 10rem;
   color: white;
-  height: 30rem;
-  width: 50rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  border-radius: 20px;
 }
 
 .customizedInput {
@@ -17,8 +17,7 @@
 }
 
 .customizedButton {
-  background-color: #02776E;
-  color: white;
+
   padding: 0.8rem 2rem;
   border-radius: 10px;
   border: none;

@@ -21,29 +21,31 @@ function CreateUser() {
 
   return (
     <div className="createUserContainer">
-      <h1>Skapa användare</h1>
-      <form className="createUserForm">
-        <div>
-          <input
-            onChange={(e) => setUser(e.target.value)}
-            className="customizedInput"
-            placeholder="Ex: Erlich Bachman"
-            type="text"
-            value={user}
-          ></input>
-        </div>
-        <div>
-          <Link to="/Lobby">
-            <button
-              disabled={user.length <= 0}
-              onClick={startChat}
-              className="customizedButton"
-            >
-              Join chat
-            </button>
-          </Link>
-        </div>
-      </form>
+      <div className="login-style">
+        <h1>Skapa användare</h1>
+        <form className="createUserForm">
+          <div>
+            <input
+              onChange={(e) => setUser(e.target.value)}
+              className="customizedInput"
+              placeholder="Ex: Erlich Bachman"
+              type="text"
+              value={user}
+            ></input>
+          </div>
+          <div>
+            <Link to="/Lobby">
+              <button
+                disabled={user.length <= 0}
+                onClick={startChat}
+                className="customizedButton"
+              >
+                Join chat
+              </button>
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

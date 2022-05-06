@@ -3,12 +3,10 @@
 
   align-items: center;
   flex-direction: column;
-  min-height: calc(100vh - 80px);
+
 }
 
-.createUserContainer h1 {
-  padding-top: 5rem;
-}
+
 
 .createUserForm {
   display: flex;
@@ -18,10 +16,22 @@
 }
 
 .createUserForm input {
-  margin: 1rem;
+  margin: 3rem;
   background-color: #eeeeee;
 }
 
 .createUserForm button {
   margin: 1rem;
+}
+
+
+.login-style{
+  background-color: #15353C;
+  padding: 10rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 20px;
 }
