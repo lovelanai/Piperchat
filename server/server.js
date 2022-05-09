@@ -1,13 +1,13 @@
 import { Server } from "socket.io";
-
+import getRooms from "./roomsStore.js";
 
 const io = new Server();
 
 io.use((socket, next) => {
   const nickname = socket.handshake.auth.nickname;
-   if (!nickname || nickname.length < 0) {
-     return next(new Error("Invalid nickname"));
-   }
+  if (!nickname || nickname.length < 0) {
+    return next(new Error("Invalid nickname"));
+  }
   socket.data.nickname = nickname;
   next();
 });
@@ -17,26 +17,41 @@ io.on("connection", (socket) => {
 
   socket.emit("welcome", "Welcome to our chat app!");
 
-   if (socket.data.nickname) {
+  if (socket.data.nickname) {
     socket.emit("connected", socket.data.nickname);
-    
+
     // send message and nickname to client
-    socket.on("message", (chatMessage, to) => {
-      io.emit("message", {
+    socket.on("message", (chatMessage, room) => {
+      io.to(room).emit("message", {
         chatMessage: chatMessage,
-        from: socket.data.nickname
+        from: socket.data.nickname,
       });
-      console.log(chatMessage);
+
+      console.log(chatMessage, room);
     });
 
-    
+    // socket.on("joinRoom", (room) => {
+    //   socket.join(room);
+    //   console.log("Joined room");
+    // });
+
+    socket.on("join", (room) => {
+      const roomWillBeCreated = !getRooms(io).includes(room);
+      socket.join(room);
+
+      // We are about to create a new room
+      if (roomWillBeCreated) {
+        io.emit("room-list", getRooms(io));
+      }
+
+      console.log("a user joined: ", room);
+    });
+
     socket.on("disconnect", () => {
       console.log("user disconnected");
-    });  
-  }  
-});  
-
-
+    });
+  }
+});
 
 io.listen(5500);
 

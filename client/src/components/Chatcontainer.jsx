@@ -18,10 +18,14 @@ function Chatcontainer() {
   };
 
   useEffect(() => {
-    socket.on("message", (messageData) => {
+    const listener = (messageData) => {
       console.log("FROM SERVER", messageData);
-    });
-  }, []);
+    };
+    socket.on("message", listener);
+    return () => {
+      socket.off("message", listener);
+    };
+  }, [socket]);
 
   return (
     <div className="chat-container">

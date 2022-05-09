@@ -1,8 +1,15 @@
-// const Server = require("socket.io")
+import { Server } from "socket.io";
 
-// export function getAroom (){
-//  const rooms = []
-//  console.log(Server.Socket.adapter.rooms)
-//  for(let [id, socket])
+function getRooms(io) {
+  const rooms = [];
 
-// }
+  for (let [id, sockets] of io.sockets.adapter.rooms) {
+    if (!sockets.has(id)) {
+      rooms.push(id);
+    }
+  }
+  console.log(rooms);
+  return rooms;
+}
+
+export default getRooms;

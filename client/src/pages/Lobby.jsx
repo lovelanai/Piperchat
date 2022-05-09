@@ -1,41 +1,53 @@
 import Roomnavbar from "../components/Roomnavbar";
 import Chatcontainer from "../components/Chatcontainer";
-import { Routes, Route } from "react-router-dom";
 import "./Lobby.css";
 import { useState } from "react";
+import { useUser } from "../context/ContextUser";
 
 function Lobby() {
-  const [test, setTest] = useState(false);
+  // const [roomSelector, setRoomSelector] = useState(false);
+  const [roomName, setRoomName] = useState("");
+  const { socket, createNewRoom, setcreateNewRoom } = useUser();
 
-  const demo = () => {
-    setTest(true);
+  const roomSubmit = (e) => {
+    e.preventDefault();
+    socket.emit("join", roomName);
+    setRoomName("");
+    setcreateNewRoom(false);
+
+    // TODO: set current room...
   };
 
   return (
     <div className="lobby-container">
-      {!test ? (
+      <div className="roomNavBar">
+        <Roomnavbar />
+      </div>
+      {createNewRoom ? (
         <div className="createRoomContainer">
           <div className="createRoom">
-            <h1>Create a new room</h1>
-            <input
-              className="customizedInput"
-              placeholder="Ex: vi som älskar bolibompa"
-            ></input>
-            <div className="createRoomButton">
-              <button className="customizedButton">Create Room</button>
-              <p>or</p>
-              <button className="customizedButton" onClick={demo}>
-                Join a room
-              </button>
-            </div>
+            <form>
+              <h1>Create a new room</h1>
+              <input
+                value={roomName}
+                onChange={(e) => setRoomName(e.target.value)}
+                className="customizedInput"
+                placeholder="Ex: vi som älskar bolibompa"
+              ></input>
+              <div className="createRoomButton">
+                <button
+                  type="submit"
+                  onClick={roomSubmit}
+                  className="customizedButton"
+                >
+                  Create Room
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       ) : (
         <>
-          <div className="roomNavBar">
-            <Roomnavbar />
-          </div>
-
           <div className="chatContainer">
             <Chatcontainer />
           </div>
