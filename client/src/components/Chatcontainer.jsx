@@ -3,8 +3,14 @@ import { UserContext } from "../context/ContextUser";
 import "./Chatcontainer.css";
 
 function Chatcontainer() {
-  const { socket, user, sendMessage, chatMessages, setChatMessages } =
-    useContext(UserContext);
+  const {
+    socket,
+    user,
+    sendMessage,
+    chatMessages,
+    setChatMessages,
+    allMessages,
+  } = useContext(UserContext);
   const [istyping, setIsTyping] = useState(false);
 
   const HandleSubmit = (e) => {
@@ -30,8 +36,15 @@ function Chatcontainer() {
 
   return (
     <div className="chat-container">
-      <h1>Messages</h1>
-      du måste joina ett rum för att chatta
+      <h1>Befintligt room</h1>
+      {allMessages.map((message, index) => (
+        <div key={index}>
+          <p>
+            {message.from} {message.chatMessage}
+          </p>
+        </div>
+      ))}
+
       <div className="messageFeild">
         {istyping ? (
           <div>
