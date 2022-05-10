@@ -14,8 +14,7 @@ export const UserContext = createContext({
   sendMessage: () => {},
   setChatMessages: () => {},
   chatMessages: "",
-  setAllMessages: () => {},
-  allMessages: [],
+  allMessages: [{}],
 });
 
 const socket = io({ autoConnect: false });
@@ -26,7 +25,13 @@ const ContextUserProvider = (props) => {
   const [rooms, setRooms] = useState([]);
   const [currentRoom, setCurrentRoom] = useState();
   const [chatMessages, setChatMessages] = useState();
-  const [allMessages, setAllMessages] = useState();
+  const [allMessages, setAllMessages] = useState([
+    {
+      chatMessage: "",
+      from: "",
+      room: "",
+    },
+  ]);
 
   // sets nickname for session
   useEffect(() => {
@@ -63,7 +68,12 @@ const ContextUserProvider = (props) => {
 
   useEffect(() => {
     const listener = (messageData) => {
-      setAllMessages(messageData);
+      let messageObject = {
+        chatMessage: messageData.chatMessage,
+        from: messageData.from + ":",
+        room: messageData.room,
+      };
+      setAllMessages((allMessages) => [...allMessages, messageObject]);
       console.log("ALL MESSAGES FROM SERVER", allMessages);
       console.log("FROM SERVER", messageData);
     };
@@ -88,6 +98,7 @@ const ContextUserProvider = (props) => {
         sendMessage,
         chatMessages,
         setChatMessages,
+        allMessages,
       }}
     >
       {props.children}

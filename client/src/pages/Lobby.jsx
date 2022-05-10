@@ -13,7 +13,7 @@ function Lobby() {
     e.preventDefault();
     joinRoom(roomName);
     setRoomName("");
-    setcreateNewRoom(false);
+    setcreateNewRoom(true);
 
     // TODO: set current room...
   };
@@ -23,7 +23,7 @@ function Lobby() {
       <div className="roomNavBar">
         <Roomnavbar />
       </div>
-      {createNewRoom ? (
+      {!createNewRoom ? (
         <div className="createRoomContainer">
           <div className="createRoom">
             <form>
