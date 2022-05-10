@@ -12,6 +12,10 @@ export const UserContext = createContext({
   currentRoom: undefined,
   joinRoom: () => {},
   sendMessage: () => {},
+  setChatMessages: () => {},
+  chatMessages: "",
+  setAllMessages: () => {},
+  allMessages: [],
 });
 
 const socket = io({ autoConnect: false });
@@ -21,6 +25,8 @@ const ContextUserProvider = (props) => {
   const [createNewRoom, setcreateNewRoom] = useState(false);
   const [rooms, setRooms] = useState([]);
   const [currentRoom, setCurrentRoom] = useState();
+  const [chatMessages, setChatMessages] = useState();
+  const [allMessages, setAllMessages] = useState();
 
   // sets nickname for session
   useEffect(() => {
@@ -48,12 +54,24 @@ const ContextUserProvider = (props) => {
     }
     socket.emit("join", roomName);
     setCurrentRoom(roomName);
-    // setMessages([]);
+    setChatMessages([]);
   };
 
   const sendMessage = (message) => {
     socket.emit("message", message, currentRoom);
   };
+
+  useEffect(() => {
+    const listener = (messageData) => {
+      setAllMessages(messageData);
+      console.log("ALL MESSAGES FROM SERVER", allMessages);
+      console.log("FROM SERVER", messageData);
+    };
+    socket.on("message", listener);
+    return () => {
+      socket.off("message", listener);
+    };
+  }, []);
 
   return (
     <UserContext.Provider
@@ -68,6 +86,8 @@ const ContextUserProvider = (props) => {
         currentRoom,
         joinRoom,
         sendMessage,
+        chatMessages,
+        setChatMessages,
       }}
     >
       {props.children}
