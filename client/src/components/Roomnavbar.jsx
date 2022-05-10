@@ -16,10 +16,12 @@ function Roomnavbar() {
   return (
     <div className="Room-nav-container">
       <div className="containerRooms">
+
         <div className="rooms">Room1</div>
         <div onClick={newRoom} className="newRoom">
           Skapa nytt rum +
         </div>
+
       </div>
     </div>
   );

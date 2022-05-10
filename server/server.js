@@ -30,6 +30,7 @@ io.on("connection", (socket) => {
       console.log(chatMessage, room);
     });
 
+
     // socket.on("joinRoom", (room) => {
     //   socket.join(room);
     //   console.log("Joined room");
@@ -38,6 +39,22 @@ io.on("connection", (socket) => {
     socket.on("join", (room) => {
       const roomWillBeCreated = !getRooms(io).includes(room);
       socket.join(room);
+
+
+    socket.on("typing", (istyping)=>{
+      io.emit("typing",{
+        istyping: istyping,
+        from: socket.data.nickname
+      }, setTimeout(5000));
+      console.log(istyping)
+    });
+    
+    socket.on("disconnect", () => {
+      console.log("user disconnected");
+    });  
+  }  
+});  
+
 
       // We are about to create a new room
       if (roomWillBeCreated) {
