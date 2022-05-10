@@ -5,7 +5,7 @@ import { UserContext } from "../context/ContextUser";
 import "./CreateUser.css";
 
 function CreateUser() {
-  const { user, setUser, socket, setStartServer } = useContext(UserContext);
+  const { user, setUser, socket, connect } = useContext(UserContext);
 
   const startChat = (e) => {
     if (user.length <= 0) {
@@ -13,7 +13,7 @@ function CreateUser() {
     } else {
       setUser(user);
     }
-    setStartServer(true);
+    connect();
     socket.on("connected", (nickname) => {
       console.log("Connected: ", nickname);
     });

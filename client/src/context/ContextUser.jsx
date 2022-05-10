@@ -1,19 +1,22 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import { io } from "socket.io-client";
 
 export const UserContext = createContext({
   user: "",
   setUser: () => {},
   socket: undefined,
-  startServer: false,
-  setStartServer: () => {},
+  connect: () => {},
+  rooms: [],
+  createNewRoom: Boolean,
+  setcreateNewRoom: () => {},
 });
 
 const socket = io({ autoConnect: false });
 
 const ContextUserProvider = (props) => {
   const [user, setUser] = useState("");
-  const [startServer, setStartServer] = useState(false);
+  const [createNewRoom, setcreateNewRoom] = useState(false);
+  const rooms = [];
 
   // sets nickname for session
   useEffect(() => {
@@ -21,7 +24,7 @@ const ContextUserProvider = (props) => {
   }, [user]);
 
   // connecting to socket on join chat button
-  useEffect(() => {
+  const connect = () => {
     if (socket.auth.nickname) {
       socket.connect();
 
@@ -33,15 +36,25 @@ const ContextUserProvider = (props) => {
         console.log("Connected");
       });
     }
-  }, [startServer]);
+  };
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, socket, setStartServer, startServer }}
+      value={{
+        user,
+        setUser,
+        socket,
+        connect,
+        rooms,
+        createNewRoom,
+        setcreateNewRoom,
+      }}
     >
       {props.children}
     </UserContext.Provider>
   );
 };
+
+export const useUser = () => useContext(UserContext);
 
 export default ContextUserProvider;
