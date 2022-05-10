@@ -29,6 +29,14 @@ io.on("connection", (socket) => {
       console.log(chatMessage);
     });
 
+
+    socket.on("typing", (istyping)=>{
+      io.emit("typing",{
+        istyping: istyping,
+        from: socket.data.nickname
+      }, setTimeout(5000));
+      console.log(istyping)
+    });
     
     socket.on("disconnect", () => {
       console.log("user disconnected");

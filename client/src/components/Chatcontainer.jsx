@@ -5,17 +5,25 @@ import "./Chatcontainer.css";
 function Chatcontainer() {
   const [message, setMessage] = useState("");
   const { socket, user } = useContext(UserContext);
+  const [istyping, setIsTyping] = useState(false)
 
   const HandleSubmit = (e) => {
     e.preventDefault();
     if (message.length) {
       console.log(message);
+
       socket.emit("message", message);
       setMessage("");
     } else {
       return;
     }
   };
+
+   useEffect(()=>{
+     socket.on("typing",(typingAlert)=>{
+       console.log("test to see if typing", typingAlert)
+     })
+   }, [],setTimeout(setIsTyping,5000))
 
   useEffect(() => {
     socket.on("message", (messageData) => {
@@ -36,12 +44,18 @@ function Chatcontainer() {
         </div>
       ))} */}
       <div className="messageFeild">
+        {istyping ?(
+        <div><p>{user} is typing...</p></div>
+        ):( null )
+        }
+        <br></br>
         <form className="chatInput">
           <input
             value={message}
             type="message"
             name="message"
             onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={() => setIsTyping(true)}
           />
           <button onClick={HandleSubmit}>send</button>
 
