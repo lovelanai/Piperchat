@@ -6,22 +6,18 @@ function Roomnavbar() {
 
   const newRoom = () => {
     setcreateNewRoom(true);
+    socket.on("joined", (room) => {
+      console.log("Joined room:", room);
+    });
   };
-
-  // function joinRoom1(room) {
-  //   socket.emit("joinRoom", room);
-  //   console.log(room);
-  // }
 
   return (
     <div className="Room-nav-container">
       <div className="containerRooms">
-
         <div className="rooms">Room1</div>
         <div onClick={newRoom} className="newRoom">
           Skapa nytt rum +
         </div>
-
       </div>
     </div>
   );

@@ -7,11 +7,11 @@ import { useUser } from "../context/ContextUser";
 function Lobby() {
   // const [roomSelector, setRoomSelector] = useState(false);
   const [roomName, setRoomName] = useState("");
-  const { socket, createNewRoom, setcreateNewRoom } = useUser();
+  const { joinRoom, createNewRoom, setcreateNewRoom } = useUser();
 
   const roomSubmit = (e) => {
     e.preventDefault();
-    socket.emit("join", roomName);
+    joinRoom(roomName);
     setRoomName("");
     setcreateNewRoom(false);
 
