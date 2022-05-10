@@ -4,29 +4,33 @@ import "./Chatcontainer.css";
 
 function Chatcontainer() {
   const [message, setMessage] = useState("");
-  const { socket, user } = useContext(UserContext);
-  const [istyping, setIsTyping] = useState(false)
+  const { socket, user, sendMessage } = useContext(UserContext);
+  const [istyping, setIsTyping] = useState(false);
 
   const HandleSubmit = (e) => {
     e.preventDefault();
     if (message.length) {
       console.log(message);
-
-      socket.emit("message", message);
+      sendMessage(message);
       setMessage("");
     } else {
       return;
     }
   };
 
-   useEffect(()=>{
-     socket.on("typing",(typingAlert)=>{
-       console.log("test to see if typing", typingAlert)
-     })
-   }, [],setTimeout(setIsTyping,5000))
+  useEffect(
+    () => {
+      socket.on("typing", (typingAlert) => {
+        console.log("test to see if typing", typingAlert);
+      });
+    },
+    [],
+    setTimeout(setIsTyping, 5000)
+  );
 
   useEffect(() => {
     const listener = (messageData) => {
+      // setMessages(messageData);
       console.log("FROM SERVER", messageData);
     };
     socket.on("message", listener);
@@ -48,10 +52,11 @@ function Chatcontainer() {
         </div>
       ))} */}
       <div className="messageFeild">
-        {istyping ?(
-        <div><p>{user} is typing...</p></div>
-        ):( null )
-        }
+        {istyping ? (
+          <div>
+            <p>{user} is typing...</p>
+          </div>
+        ) : null}
         <br></br>
         <form className="chatInput">
           <input

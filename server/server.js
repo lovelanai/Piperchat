@@ -19,49 +19,40 @@ io.on("connection", (socket) => {
 
   if (socket.data.nickname) {
     socket.emit("connected", socket.data.nickname);
-
-    // send message and nickname to client
-    socket.on("message", (chatMessage, room) => {
-      io.to(room).emit("message", {
-        chatMessage: chatMessage,
-        from: socket.data.nickname,
-      });
-
-      console.log(chatMessage, room);
-    });
-
-
-    // socket.on("joinRoom", (room) => {
-    //   socket.join(room);
-    //   console.log("Joined room");
-    // });
+    socket.emit("room-list", getRooms(io));
 
     socket.on("join", (room) => {
       const roomWillBeCreated = !getRooms(io).includes(room);
       socket.join(room);
 
-
-    socket.on("typing", (istyping)=>{
-      io.emit("typing",{
-        istyping: istyping,
-        from: socket.data.nickname
-      }, setTimeout(5000));
-      console.log(istyping)
-    });
-    
-    socket.on("disconnect", () => {
-      console.log("user disconnected");
-    });  
-  }  
-});  
-
-
       // We are about to create a new room
       if (roomWillBeCreated) {
         io.emit("room-list", getRooms(io));
       }
-
+      socket.emit("joined", room);
       console.log("a user joined: ", room);
+    });
+
+    // send message and nickname to client
+    socket.on("message", (chatMessage, room) => {
+      console.log(chatMessage, room);
+      io.to(room).emit("message", {
+        chatMessage: chatMessage,
+        from: socket.data.nickname,
+        room: room,
+      });
+    });
+
+    socket.on("typing", (istyping) => {
+      io.emit(
+        "typing",
+        {
+          istyping: istyping,
+          from: socket.data.nickname,
+        },
+        setTimeout(5000)
+      );
+      console.log(istyping);
     });
 
     socket.on("disconnect", () => {

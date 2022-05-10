@@ -9,6 +9,9 @@ export const UserContext = createContext({
   rooms: [],
   createNewRoom: Boolean,
   setcreateNewRoom: () => {},
+  currentRoom: undefined,
+  joinRoom: () => {},
+  sendMessage: () => {},
 });
 
 const socket = io({ autoConnect: false });
@@ -16,7 +19,8 @@ const socket = io({ autoConnect: false });
 const ContextUserProvider = (props) => {
   const [user, setUser] = useState("");
   const [createNewRoom, setcreateNewRoom] = useState(false);
-  const rooms = [];
+  const [rooms, setRooms] = useState([]);
+  const [currentRoom, setCurrentRoom] = useState();
 
   // sets nickname for session
   useEffect(() => {
@@ -38,6 +42,19 @@ const ContextUserProvider = (props) => {
     }
   };
 
+  const joinRoom = (roomName) => {
+    if (currentRoom) {
+      socket.emit("leave", currentRoom);
+    }
+    socket.emit("join", roomName);
+    setCurrentRoom(roomName);
+    // setMessages([]);
+  };
+
+  const sendMessage = (message) => {
+    socket.emit("message", message, currentRoom);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -48,6 +65,9 @@ const ContextUserProvider = (props) => {
         rooms,
         createNewRoom,
         setcreateNewRoom,
+        currentRoom,
+        joinRoom,
+        sendMessage,
       }}
     >
       {props.children}
