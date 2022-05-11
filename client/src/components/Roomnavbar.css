@@ -15,6 +15,11 @@
 .Room-nav-container {
   width: 100%;
 }
+
+.Room-nav-container button {
+  font-size: 1rem;
+}
+
 .containerRooms {
   display: flex;
   flex-direction: column;
@@ -51,6 +56,14 @@
   background-color: #5cad5f;
   color: white;
   padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid black;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 500px) {
+  .containerRooms h2 {
+    font-size: 1rem;
+  }
 }

@@ -1,3 +1,4 @@
 .mainContainer {
   height: calc(100vh - 144px);
+  background-color: #01776e;
 }

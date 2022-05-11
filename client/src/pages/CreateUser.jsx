@@ -19,7 +19,7 @@ function CreateUser() {
   return (
     <div className="createUserContainer">
       <div className="login-style">
-        <h1>Skapa användare</h1>
+        <h1>Enter nickname</h1>
         <form className="createUserForm">
           <div>
             <input

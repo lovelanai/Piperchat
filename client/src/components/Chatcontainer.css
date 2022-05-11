@@ -4,14 +4,30 @@
   color: black;
 }
 
-.chat-container h1 {
+.roomDisplay {
+  font-size: 2rem;
+  padding: 0.5rem;
+  text-align: center;
   margin: 0;
+  background: #5d9dad;
+}
+
+.roomDisplay p {
+  margin: 0;
+}
+
+.roomDisplay p:first-child {
+  font-size: 1rem;
+}
+
+.roomDisplay p:last-child {
+  font-size: 2rem;
 }
 
 .messageFeild {
   position: fixed;
   bottom: 0;
-  background-color: #5c9ead;
+  background-color: #5d9dad;
   display: flex;
   height: 5rem;
   flex-direction: row;
@@ -46,4 +62,32 @@
   display: flex;
   align-items: center;
   width: 100%;
+}
+
+.arrow-left {
+  width: 0;
+  height: 0;
+  border-left: 1px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 11px solid #5d9dad;
+  transform: rotate(331deg);
+  position: absolute;
+  top: -7px;
+  left: 1px;
+}
+
+.userBadge {
+  display: flex;
+  border-radius: 100%;
+  align-items: center;
+  flex-direction: column;
+  width: 4rem;
+  height: 4rem;
+  background: orange;
+  justify-content: center;
+}
+
+.mapped-messages {
+  overflow-y: scroll;
+  height: calc(100vh - 297px);
 }

@@ -1,5 +1,6 @@
 import "./Roomnavbar.css";
 import { useUser } from "../context/ContextUser";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 function Roomnavbar() {
   const { newRoom, joinRoom, rooms, currentRoom, joinAvalibleRoom } = useUser();
@@ -21,7 +22,8 @@ function Roomnavbar() {
           </div>
         ))}
         <button onClick={newRoom} className="newRoom">
-          Skapa nytt rum
+          <span>Skapa nytt rum</span>{" "}
+          <AiOutlinePlusCircle style={{ marginLeft: "0.2rem" }} />
         </button>
       </div>
     </div>

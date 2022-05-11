@@ -23,11 +23,27 @@
 
 .login-style {
   background-color: #15353c;
-  padding: 10rem;
+  padding: 6rem;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   border-radius: 20px;
+}
+
+@media (max-width: 600px) {
+  .login-style {
+    background-color: #15353c;
+    padding: 0;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+  }
+  .createUserForm input {
+    margin: 1rem;
+  }
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { UserContext } from "../context/ContextUser";
 import "./Chatcontainer.css";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -36,17 +36,58 @@ function Chatcontainer() {
     setTimeout(setIsTyping, 5000)
   );
 
+  const scroll = document.getElementById("messages");
+  // id of the chat container ---------- ^^^
+  if (scroll) {
+    scroll.scrollTop = scroll.scrollHeight;
+  }
+
   return (
     <div className="chat-container">
-      <h1>{currentRoom}</h1>
-      {allMessages.map((message, index) => (
-        <div key={index}>
-          <p>
-            <FaRegUserCircle />
-            {message.from} {message.chatMessage}
-          </p>
-        </div>
-      ))}
+      <div className="roomDisplay">
+        <p>chatting in:</p>
+        <p>{currentRoom}</p>
+      </div>
+      <div id="messages" className="mapped-messages">
+        {allMessages.map((message, index) => (
+          <div
+            style={{
+              display: "flex",
+
+              margin: "1rem",
+              flexDirection: "column",
+            }}
+            key={index}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                height: "3rem",
+              }}
+            >
+              <p style={{ fontSize: "2rem", marginRight: "0.5rem" }}>
+                <FaRegUserCircle />
+              </p>
+              <p>{message.from}</p>
+            </div>
+            <div
+              style={{
+                width: "22rem",
+                background: "#5d9dad",
+                borderRadius: "1rem",
+                marginLeft: "3rem",
+                position: "relative",
+              }}
+            >
+              <div className="arrow-left"></div>
+              <p style={{ marginLeft: "1rem", color: "white" }}>
+                {message.chatMessage}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
 
       <div className="messageFeild">
         {istyping ? (

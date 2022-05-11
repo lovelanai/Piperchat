@@ -129,7 +129,7 @@ const ContextUserProvider = (props) => {
     const listener = (messageData) => {
       let messageObject = {
         chatMessage: messageData.chatMessage,
-        from: messageData.from + ":",
+        from: messageData.from,
         room: messageData.room,
       };
       setAllMessages((allMessages) => [...allMessages, messageObject]);
