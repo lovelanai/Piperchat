@@ -15,6 +15,8 @@ export const UserContext = createContext({
   setChatMessages: () => {},
   chatMessages: "",
   allMessages: [{}],
+  newRoom: () => {},
+  joinAvalibleRoom: () => {},
 });
 
 const socket = io({ autoConnect: false });
@@ -25,13 +27,8 @@ const ContextUserProvider = (props) => {
   const [rooms, setRooms] = useState([]);
   const [currentRoom, setCurrentRoom] = useState();
   const [chatMessages, setChatMessages] = useState();
-  const [allMessages, setAllMessages] = useState([
-    {
-      chatMessage: "",
-      from: "",
-      room: "",
-    },
-  ]);
+  const [allMessages, setAllMessages] = useState([]);
+  const [usersInRoom, setUsersInRoom] = useState([]);
 
   // sets nickname for session
   useEffect(() => {
@@ -53,13 +50,43 @@ const ContextUserProvider = (props) => {
     }
   };
 
+  // creating rooms
+  useEffect(() => {
+    const listener = (roomsData) => {
+      console.log(roomsData);
+      setRooms(roomsData);
+    };
+    socket.on("room-list", listener);
+
+    return () => {
+      socket.off("room-list", listener);
+    };
+  }, []);
+
+  // render create room input and join created room
+  const newRoom = () => {
+    setcreateNewRoom(true);
+    socket.on("joined", (room) => {
+      console.log("Joined room:", room);
+    });
+  };
+
+  const joinAvalibleRoom = (e) => {
+    const joinedroom = e.target.value;
+    setCurrentRoom(joinedroom);
+    socket.emit("leave", currentRoom);
+    socket.emit("join", joinedroom);
+    setAllMessages([]);
+  };
+
+  // join a room
   const joinRoom = (roomName) => {
     if (currentRoom) {
       socket.emit("leave", currentRoom);
     }
     socket.emit("join", roomName);
     setCurrentRoom(roomName);
-    setChatMessages([]);
+    setAllMessages([]);
   };
 
   const sendMessage = (message) => {
@@ -99,6 +126,8 @@ const ContextUserProvider = (props) => {
         chatMessages,
         setChatMessages,
         allMessages,
+        newRoom,
+        joinAvalibleRoom,
       }}
     >
       {props.children}

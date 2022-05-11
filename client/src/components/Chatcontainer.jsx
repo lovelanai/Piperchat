@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../context/ContextUser";
 import "./Chatcontainer.css";
+import { FaRegUserCircle } from "react-icons/fa";
 
 function Chatcontainer() {
   const {
@@ -10,6 +11,7 @@ function Chatcontainer() {
     chatMessages,
     setChatMessages,
     allMessages,
+    currentRoom,
   } = useContext(UserContext);
   const [istyping, setIsTyping] = useState(false);
 
@@ -36,10 +38,11 @@ function Chatcontainer() {
 
   return (
     <div className="chat-container">
-      <h1>Befintligt room</h1>
+      <h1>{currentRoom}</h1>
       {allMessages.map((message, index) => (
         <div key={index}>
           <p>
+            <FaRegUserCircle />
             {message.from} {message.chatMessage}
           </p>
         </div>
@@ -54,7 +57,7 @@ function Chatcontainer() {
         <br></br>
         <form className="chatInput">
           <input
-            value={chatMessages}
+            value={chatMessages || ""}
             type="message"
             name="message"
             onChange={(e) => setChatMessages(e.target.value)}

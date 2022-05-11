@@ -1,12 +1,9 @@
 .createUserContainer {
   display: flex;
-
+  background-color: #01776e;
   align-items: center;
   flex-direction: column;
-
 }
-
-
 
 .createUserForm {
   display: flex;
@@ -24,9 +21,8 @@
   margin: 1rem;
 }
 
-
-.login-style{
-  background-color: #15353C;
+.login-style {
+  background-color: #15353c;
   padding: 10rem;
   color: white;
   display: flex;

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useUser } from "../context/ContextUser";
 
 function Lobby() {
-  // const [roomSelector, setRoomSelector] = useState(false);
+  const [roomSelector, setRoomSelector] = useState(false);
   const [roomName, setRoomName] = useState("");
   const { joinRoom, createNewRoom, setcreateNewRoom } = useUser();
 
@@ -13,8 +13,7 @@ function Lobby() {
     e.preventDefault();
     joinRoom(roomName);
     setRoomName("");
-    setcreateNewRoom(true);
-
+    setcreateNewRoom(false);
     // TODO: set current room...
   };
 
@@ -23,7 +22,7 @@ function Lobby() {
       <div className="roomNavBar">
         <Roomnavbar />
       </div>
-      {!createNewRoom ? (
+      {createNewRoom ? (
         <div className="createRoomContainer">
           <div className="createRoom">
             <form>

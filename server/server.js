@@ -43,6 +43,12 @@ io.on("connection", (socket) => {
       });
     });
 
+    socket.on("leave", (room) => {
+      socket.leave(room);
+      console.log("user left the room", room);
+      socket.emit("left", room);
+    });
+
     socket.on("typing", (istyping) => {
       io.emit(
         "typing",
