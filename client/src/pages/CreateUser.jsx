@@ -14,9 +14,6 @@ function CreateUser() {
       setUser(user);
     }
     connect();
-    socket.on("connected", (nickname) => {
-      console.log("Connected: ", nickname);
-    });
   };
 
   return (

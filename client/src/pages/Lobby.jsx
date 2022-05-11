@@ -7,11 +7,11 @@ import { useUser } from "../context/ContextUser";
 function Lobby() {
   const [roomSelector, setRoomSelector] = useState(false);
   const [roomName, setRoomName] = useState("");
-  const { joinRoom, createNewRoom, setcreateNewRoom } = useUser();
+  const { createAndJoinRoom, createNewRoom, setcreateNewRoom } = useUser();
 
   const roomSubmit = (e) => {
     e.preventDefault();
-    joinRoom(roomName);
+    createAndJoinRoom(roomName);
     setRoomName("");
     setcreateNewRoom(false);
     // TODO: set current room...
@@ -35,6 +35,7 @@ function Lobby() {
               ></input>
               <div className="createRoomButton">
                 <button
+                  disabled={roomName.length <= 0}
                   type="submit"
                   onClick={roomSubmit}
                   className="customizedButton"
