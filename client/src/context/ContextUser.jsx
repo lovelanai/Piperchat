@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { io } from "socket.io-client";
+import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext({
   user: "",
@@ -29,10 +30,14 @@ const ContextUserProvider = (props) => {
   const [chatMessages, setChatMessages] = useState();
   const [allMessages, setAllMessages] = useState([]);
   const [usersInRoom, setUsersInRoom] = useState([]);
-
+  const navigate = useNavigate();
   // sets nickname for session
   useEffect(() => {
     socket.auth = { nickname: user };
+    if (user.length === 0) {
+      console.log("ingen inloggad");
+      navigate("/");
+    }
   }, [user]);
 
   // connecting to socket on join chat button
@@ -77,6 +82,7 @@ const ContextUserProvider = (props) => {
     socket.emit("leave", currentRoom);
     socket.emit("join", joinedroom);
     setAllMessages([]);
+    setcreateNewRoom(false);
   };
 
   // join a room
@@ -86,6 +92,7 @@ const ContextUserProvider = (props) => {
     }
     socket.emit("join", roomName);
     setCurrentRoom(roomName);
+    setcreateNewRoom(false);
     setAllMessages([]);
   };
 
