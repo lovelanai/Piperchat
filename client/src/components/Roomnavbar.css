@@ -3,7 +3,7 @@
   height: 3rem;
   background: #15353c;
   color: white;
-  border: 1px solid white;
+  border: none;
 }
 
 .roomsButtons:disabled {
@@ -41,7 +41,7 @@
 .containerRooms h2 {
   background-color: #15353c;
   margin: 0;
-  padding: 1rem;
+  padding: 22.5px;
 }
 
 .rooms:last-child {

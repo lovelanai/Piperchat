@@ -53,6 +53,7 @@ function Lobby() {
           </div>
         </>
       )}
+      <div className="roomNavBar"></div>
     </div>
   );
 }
