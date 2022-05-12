@@ -84,7 +84,7 @@ const ContextUserProvider = (props) => {
     if (currentRoom) {
       socket.emit("leave", currentRoom);
       console.log("Lämnat", currentRoom);
-      // setRooms([rooms]);
+      setRooms([rooms]);
       console.log(rooms, "rum");
     }
 

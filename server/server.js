@@ -53,6 +53,8 @@ io.on("connection", (socket) => {
       socket.leave(room);
       console.log(socket.data.nickname, "left the room", room);
       socket.emit("left", room);
+      io.emit("room-list", getRooms(io));
+      console.log(getRooms(io));
     });
 
     socket.on("typing", (istyping) => {
