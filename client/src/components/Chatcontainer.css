@@ -2,6 +2,7 @@
   min-height: calc(100vh - 144px);
   background-color: white;
   color: black;
+  border-radius: 1rem;
 }
 
 .roomDisplay {
@@ -9,7 +10,8 @@
   padding: 0.5rem;
   text-align: center;
   margin: 0;
-  background: #5d9dad;
+  background: #4eaca1;
+  border-radius: 1rem 1rem 0rem 0rem;
 }
 
 .roomDisplay p {
@@ -25,16 +27,45 @@
 }
 
 .messageFeild {
-  position: fixed;
   bottom: 0;
-  background-color: #5d9dad;
+  background-color: #01776e;
   display: flex;
   height: 5rem;
   flex-direction: row;
-  width: 100%;
+
   justify-content: flex-start;
   padding-left: 1rem;
   align-content: center;
+}
+
+.messageWithInfo {
+  display: flex;
+
+  margin: 1rem;
+  flex-direction: column;
+}
+
+.messageInfo {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+}
+
+.chatBubble {
+  width: 24rem;
+  background: #5d9dad;
+  border-radius: 1rem;
+  margin-left: 3rem;
+  position: relative;
+  display: flex;
+  word-wrap: break-word;
+}
+
+.chatBubble p {
+  max-width: 22rem;
+  margin-left: 1rem;
+  color: black;
+  white-space: pre-line;
 }
 
 .chatInput input {
@@ -48,7 +79,7 @@
   height: 2rem;
 }
 .chatInput button {
-  background-color: #02776e;
+  background-color: #5d9cad;
   color: white;
   border: none;
   height: 2.1rem;
@@ -89,5 +120,6 @@
 
 .mapped-messages {
   overflow-y: scroll;
+  scroll-behavior: smooth;
   height: calc(100vh - 297px);
 }

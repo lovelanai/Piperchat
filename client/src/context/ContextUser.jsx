@@ -25,7 +25,7 @@ const socket = io({ autoConnect: false });
 
 const ContextUserProvider = (props) => {
   const [user, setUser] = useState("");
-  const [createNewRoom, setcreateNewRoom] = useState(false);
+  const [createNewRoom, setcreateNewRoom] = useState(true);
   const [rooms, setRooms] = useState([]);
   const [currentRoom, setCurrentRoom] = useState();
   const [chatMessages, setChatMessages] = useState();

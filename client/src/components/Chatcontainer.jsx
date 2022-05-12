@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useContext } from "react";
 import { UserContext } from "../context/ContextUser";
 import "./Chatcontainer.css";
 import { FaRegUserCircle } from "react-icons/fa";
-
+import ChatBubble from "react-chat-bubble";
 function Chatcontainer() {
   const {
     socket,
@@ -26,21 +26,24 @@ function Chatcontainer() {
     }
   };
 
-  useEffect(
-    () => {
-      socket.on("typing", (typingAlert) => {
-        console.log("test to see if typing", typingAlert);
-      });
-    },
-    [],
-    setTimeout(setIsTyping, 5000)
-  );
+  // useEffect(
+  //   () => {
+  //     socket.on("typing", (typingAlert) => {
+  //       console.log("test to see if typing", typingAlert);
+  //     });
+  //   },
+  //   [],
+  //   setTimeout(setIsTyping, 5000)
+  // );
 
-  const scroll = document.getElementById("messages");
-  // id of the chat container ---------- ^^^
-  if (scroll) {
-    scroll.scrollTop = scroll.scrollHeight;
-  }
+  // scroll to bottom of chat on every new message
+  useEffect(() => {
+    const scroll = document.getElementById("messages");
+    // id of the chat container ---------- ^^^
+    if (scroll) {
+      scroll.scrollTop = scroll.scrollHeight;
+    }
+  }, [allMessages]);
 
   return (
     <div className="chat-container">
@@ -50,59 +53,35 @@ function Chatcontainer() {
       </div>
       <div id="messages" className="mapped-messages">
         {allMessages.map((message, index) => (
-          <div
-            style={{
-              display: "flex",
-
-              margin: "1rem",
-              flexDirection: "column",
-            }}
-            key={index}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                height: "3rem",
-              }}
-            >
+          <div className="messageWithInfo" key={index}>
+            <div className="messageInfo">
               <p style={{ fontSize: "2rem", marginRight: "0.5rem" }}>
                 <FaRegUserCircle />
               </p>
               <p>{message.from}</p>
             </div>
-            <div
-              style={{
-                width: "22rem",
-                background: "#5d9dad",
-                borderRadius: "1rem",
-                marginLeft: "3rem",
-                position: "relative",
-              }}
-            >
+            <div className="chatBubble">
               <div className="arrow-left"></div>
-              <p style={{ marginLeft: "1rem", color: "white" }}>
-                {message.chatMessage}
-              </p>
+              <p>{message.chatMessage} </p>
             </div>
           </div>
         ))}
       </div>
 
       <div className="messageFeild">
-        {istyping ? (
+        {/* {istyping ? (
           <div>
             <p>{user} is typing...</p>
           </div>
         ) : null}
-        <br></br>
+        <br></br> */}
         <form className="chatInput">
           <input
             value={chatMessages || ""}
             type="message"
             name="message"
             onChange={(e) => setChatMessages(e.target.value)}
-            onKeyDown={() => setIsTyping(true)}
+            // onKeyDown={() => setIsTyping(true)}
           />
           <button onClick={HandleSubmit}>send</button>
 
