@@ -1,12 +1,9 @@
 .createUserContainer {
   display: flex;
-
+  background-color: #01776e;
   align-items: center;
   flex-direction: column;
-
 }
-
-
 
 .createUserForm {
   display: flex;
@@ -24,14 +21,29 @@
   margin: 1rem;
 }
 
-
-.login-style{
-  background-color: #15353C;
-  padding: 10rem;
+.login-style {
+  background-color: #15353c;
+  padding: 6rem;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   border-radius: 20px;
+}
+
+@media (max-width: 600px) {
+  .login-style {
+    background-color: #15353c;
+    padding: 0;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+  }
+  .createUserForm input {
+    margin: 1rem;
+  }
 }

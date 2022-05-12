@@ -1,18 +1,35 @@
 .chat-container {
-
   min-height: calc(100vh - 144px);
+  background-color: white;
+  color: black;
 }
 
-.chat-container h1 {
+.roomDisplay {
+  font-size: 2rem;
+  padding: 0.5rem;
+  text-align: center;
   margin: 0;
+  background: #5d9dad;
+}
+
+.roomDisplay p {
+  margin: 0;
+}
+
+.roomDisplay p:first-child {
+  font-size: 1rem;
+}
+
+.roomDisplay p:last-child {
+  font-size: 2rem;
 }
 
 .messageFeild {
   position: fixed;
   bottom: 0;
-  background-color: #5c9ead;
+  background-color: #5d9dad;
   display: flex;
-      height: 5rem;
+  height: 5rem;
   flex-direction: row;
   width: 100%;
   justify-content: flex-start;
@@ -21,34 +38,56 @@
 }
 
 .chatInput input {
- 
   text-overflow: auto;
   word-wrap: break-word;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
   border: none;
 
- width: 50%;
-      height: 2rem;
-
+  width: 50%;
+  height: 2rem;
 }
 .chatInput button {
-  background-color: #02776E;
+  background-color: #02776e;
   color: white;
   border: none;
-  height:2.1rem;
-  
+  height: 2.1rem;
+
   /* margin: 0 1rem; */
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
-
-
-
 }
 
-.chatInput{
+.chatInput {
   display: flex;
   align-items: center;
   width: 100%;
-  
+}
+
+.arrow-left {
+  width: 0;
+  height: 0;
+  border-left: 1px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 11px solid #5d9dad;
+  transform: rotate(331deg);
+  position: absolute;
+  top: -7px;
+  left: 1px;
+}
+
+.userBadge {
+  display: flex;
+  border-radius: 100%;
+  align-items: center;
+  flex-direction: column;
+  width: 4rem;
+  height: 4rem;
+  background: orange;
+  justify-content: center;
+}
+
+.mapped-messages {
+  overflow-y: scroll;
+  height: calc(100vh - 297px);
 }

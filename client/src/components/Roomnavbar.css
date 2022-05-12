@@ -1,14 +1,33 @@
+.roomsButtons {
+  width: 100%;
+  height: 3rem;
+  background: #15353c;
+  color: white;
+  border: 1px solid white;
+}
+
+.roomsButtons:disabled {
+  text-decoration: underline;
+  background-color: red;
+  cursor: default;
+}
 
 .Room-nav-container {
   width: 100%;
 }
+
+.Room-nav-container button {
+  font-size: 1rem;
+}
+
 .containerRooms {
   display: flex;
   flex-direction: column;
   justify-self: left;
   min-height: calc(100vh - 144px);
-  background-color: #eeeeee;
-  
+  background-color: #01776e;
+  color: white;
+  text-align: center;
 }
 
 .rooms {
@@ -17,6 +36,12 @@
   padding: 1rem;
   text-align: left;
   border-bottom: 1px solid black;
+}
+
+.containerRooms h2 {
+  background-color: #15353c;
+  margin: 0;
+  padding: 1rem;
 }
 
 .rooms:last-child {
@@ -31,6 +56,14 @@
   background-color: #5cad5f;
   color: white;
   padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid black;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 500px) {
+  .containerRooms h2 {
+    font-size: 1rem;
+  }
 }

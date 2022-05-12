@@ -8,7 +8,7 @@ function getRooms(io) {
       rooms.push(id);
     }
   }
-  console.log(rooms);
+
   return rooms;
 }
 

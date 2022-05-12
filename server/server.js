@@ -13,13 +13,14 @@ io.use((socket, next) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  console.log(socket.data.nickname, "connected");
 
   socket.emit("welcome", "Welcome to our chat app!");
 
   if (socket.data.nickname) {
     socket.emit("connected", socket.data.nickname);
     socket.emit("room-list", getRooms(io));
+    socket.emit("user-list");
 
     socket.on("join", (room) => {
       const roomWillBeCreated = !getRooms(io).includes(room);
@@ -30,7 +31,12 @@ io.on("connection", (socket) => {
         io.emit("room-list", getRooms(io));
       }
       socket.emit("joined", room);
-      console.log("a user joined: ", room);
+      console.log(socket.data.nickname, "joined", room);
+
+      // check how many users are in a joined room
+      const numberOfUsers = io.sockets.adapter.rooms.get(room).size;
+      console.log(numberOfUsers);
+      io.emit("clientsInRoom", numberOfUsers);
     });
 
     // send message and nickname to client
@@ -41,6 +47,12 @@ io.on("connection", (socket) => {
         from: socket.data.nickname,
         room: room,
       });
+    });
+
+    socket.on("leave", (room) => {
+      socket.leave(room);
+      console.log(socket.data.nickname, "left the room", room);
+      socket.emit("left", room);
     });
 
     socket.on("typing", (istyping) => {
@@ -56,7 +68,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("disconnect", () => {
-      console.log("user disconnected");
+      console.log(socket.data.nickname, "disconnected");
     });
   }
 });
