@@ -1,6 +1,5 @@
 .createUserContainer {
   display: flex;
-  background-color: #01776e;
   align-items: center;
   flex-direction: column;
 }
@@ -14,7 +13,7 @@
 
 .createUserForm input {
   margin: 3rem;
-  background-color: #eeeeee;
+  background-color: #eeeeeed9;
 }
 
 .createUserForm button {
@@ -22,28 +21,42 @@
 }
 
 .login-style {
-  background-color: #15353c;
+  background-color: #0104041f;
+  margin-top: 3rem;
   padding: 6rem;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border-radius: 20px;
+  width: 70%;
+  border-radius: 5px;
+  box-shadow: #004f3b61 8px 10px 27px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 760px) {
   .login-style {
-    background-color: #15353c;
-    padding: 0;
-    color: white;
+    padding: 4rem;
+    width: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    border-radius: 20px;
   }
   .createUserForm input {
     margin: 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .login-style {
+    padding: 1rem;
+  }
+  .createUserForm input {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+  .login-style h1 {
+    font-size: 1.4rem;
   }
 }

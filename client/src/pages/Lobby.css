@@ -19,15 +19,15 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: #02776E;
 }
 
 .createRoom {
-  background-color: #15353c;
+  background-color: #15353c26;
   color: white;
   height: 25rem;
-  width: 30rem;
-  border-radius: 20px;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: #004f3b61 8px 10px 27px;
 }
 
 .createRoom form {
@@ -45,12 +45,12 @@
 .customizedInput {
   padding: 1.2rem 2rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 1.2rem;
 }
 
 .customizedButton {
-  background-color: #02776e;
+  background-color: #015f57;
   color: white;
   padding: 0.8rem 2rem;
   border-radius: 10px;
@@ -77,6 +77,39 @@
   flex-direction: column;
 }
 
+@media (max-width: 800px) {
+  .lobby-container {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 144px);
+    width: 100vw;
+  }
+  .containerRooms {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-height: 4rem;
+    color: white;
+    text-align: center;
+
+    flex-shrink: 5;
+    flex-wrap: wrap-reverse;
+  }
+  .containerRooms h2 {
+    height: 100%;
+    padding: 10px;
+  }
+
+  .roomNavBar {
+    width: 100%;
+  }
+
+  .chat-container {
+    margin: 0rem 1rem 1rem 1rem;
+    border-radius: 5px;
+  }
+}
+
 @media (max-width: 700px) {
   .createRoom {
     width: 20rem;
@@ -86,5 +119,30 @@
 @media (max-width: 500px) {
   .roomNavBar {
     width: 7.5rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .createRoom {
+    width: 13rem;
+  }
+  .customizedInput {
+    padding: 1rem 1rem;
+    margin: 0;
+    font-size: 1rem;
+  }
+  .createRoom h1 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  .room-form {
+    padding: 0;
+  }
+
+  .containerRooms {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 }

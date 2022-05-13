@@ -30,7 +30,7 @@ function CreateUser() {
               value={user}
             ></input>
           </div>
-          <div>
+          <div className="join-room">
             <Link to="/Lobby">
               <button
                 disabled={user.length <= 0}

@@ -1,12 +1,13 @@
 import "./Header.css";
 
 import piedpiper from "../assets/img/piedpiper.png";
+import logo from "../assets/img/logo.png";
 
 function Header() {
   return (
     <div className="header">
       <div>
-        <img src={piedpiper} alt="logo" />
+        <img src={logo} alt="logo" />
       </div>
     </div>
   );
