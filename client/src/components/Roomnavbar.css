@@ -51,22 +51,16 @@
   border-bottom: 1px solid black;
 }
 
-.newRoom {
-  background-color: #12665e;
-  color: white;
-  padding: 1rem;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.mobile-nav {
+  display: none;
 }
 
-@media (max-width: 500px) {
-  .containerRooms h2 {
-    font-size: 1rem;
+@media (max-width: 800px) {
+  .mobile-nav {
+    display: unset;
   }
-  .containerRooms {
-    display: flex;
-    /* flex-direction: row; */
+
+  .desktop-nav {
+    display: none;
   }
 }

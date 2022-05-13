@@ -108,13 +108,10 @@ function Chatcontainer() {
             setChatMessages(e.target.value);
             sendIsTyping(e.target.value);
           }}
-          // onKeyDown={() => setIsTyping(true)}
         />
         <button onClick={HandleSubmit}>
           <AiOutlineSend />
         </button>
-
-        {/* <button onClick={test}>test</button> */}
       </form>
     </div>
   );
