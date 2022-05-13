@@ -1,5 +1,10 @@
 .header {
-  background-color: #02776E;
+  /* background-color: #05766c; */
+
+  justify-self: center;
+  margin: auto;
+  /* border-radius: 20px;
+  box-shadow: #05766c 25px 5px 25px 25px; */
   display: flex;
   justify-content: center;
   align-items: center;

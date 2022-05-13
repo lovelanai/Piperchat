@@ -1,5 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Roboto&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
 .App {
   text-align: center;
+  background-image: linear-gradient(
+    to left bottom,
+    #12665e,
+    #11736a,
+    #108177,
+    #0e8f83,
+    #0a9d90,
+    #08a194,
+    #05a597,
+    #02a99b,
+    #02a496,
+    #029f91,
+    #029a8d,
+    #029588
+  );
 }
 
 .App-logo {
@@ -14,7 +35,6 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

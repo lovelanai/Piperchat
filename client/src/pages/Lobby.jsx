@@ -14,7 +14,6 @@ function Lobby() {
     createAndJoinRoom(roomName);
     setRoomName("");
     setcreateNewRoom(false);
-    // TODO: set current room...
   };
 
   return (
@@ -25,13 +24,12 @@ function Lobby() {
       {createNewRoom ? (
         <div className="createRoomContainer">
           <div className="createRoom">
-            <form>
-              <h1>Create a new room</h1>
+            <form className="room-form">
+              <h1>Create new room</h1>
               <input
                 value={roomName}
                 onChange={(e) => setRoomName(e.target.value)}
                 className="customizedInput"
-                placeholder="Ex: vi som älskar bolibompa"
               ></input>
               <div className="createRoomButton">
                 <button
