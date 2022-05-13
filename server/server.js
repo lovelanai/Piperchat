@@ -53,18 +53,20 @@ io.on("connection", (socket) => {
       socket.leave(room);
       console.log(socket.data.nickname, "left the room", room);
       socket.emit("left", room);
+      io.emit("room-list", getRooms(io));
+      console.log(getRooms(io));
     });
 
-    socket.on("typing", (istyping) => {
-      io.emit(
-        "typing",
-        {
-          istyping: istyping,
-          from: socket.data.nickname,
-        },
-        setTimeout(5000)
-      );
-      console.log(istyping);
+    socket.on("isTyping", (data, room) => {
+      if (data.isTyping) {
+        socket.broadcast
+          .to(data.room)
+          .emit("isTyping", `${data.user} is typing...`);
+        console.log(data.user, "is typing!!...");
+      } else {
+        socket.broadcast.to(data.room).emit("isTyping", "");
+        console.log("...");
+      }
     });
 
     socket.on("disconnect", () => {

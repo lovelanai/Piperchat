@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext({
@@ -19,6 +19,9 @@ export const UserContext = createContext({
   newRoom: () => {},
   joinAvalibleRoom: () => {},
   setUsersInRoom: () => {},
+  whoIsTyping: "",
+  sendIsTyping: () => {},
+  setWhoIsTyping: Boolean,
 });
 
 const socket = io({ autoConnect: false });
@@ -30,7 +33,7 @@ const ContextUserProvider = (props) => {
   const [currentRoom, setCurrentRoom] = useState();
   const [chatMessages, setChatMessages] = useState();
   const [allMessages, setAllMessages] = useState([]);
-  const [usersInRoom, setUsersInRoom] = useState();
+  const [whoIsTyping, setWhoIsTyping] = useState(user);
   const navigate = useNavigate();
 
   // sets nickname for session
@@ -84,7 +87,7 @@ const ContextUserProvider = (props) => {
     if (currentRoom) {
       socket.emit("leave", currentRoom);
       console.log("Lämnat", currentRoom);
-      // setRooms([rooms]);
+      setRooms([rooms]);
       console.log(rooms, "rum");
     }
 
@@ -124,6 +127,34 @@ const ContextUserProvider = (props) => {
     });
   }, []);
 
+  const sendIsTyping = (message) => {
+    if (message) {
+      console.log("isTyping", message, user, currentRoom);
+      socket.emit("isTyping", {
+        user: user,
+        isTyping: true,
+        room: currentRoom,
+      });
+    } else {
+      socket.emit("isTyping", {
+        user: user,
+        isTyping: false,
+        room: currentRoom,
+      });
+    }
+  };
+
+  useEffect(() => {
+    let watching = (someoneIsTypingMessage) => {
+      setWhoIsTyping(someoneIsTypingMessage);
+      console.log(whoIsTyping);
+      console.log(someoneIsTypingMessage);
+    };
+    socket.on("isTyping", watching);
+    console.log(watching);
+    return () => socket.off("isTyping", watching);
+  }, [socket]);
+
   // show messages
   useEffect(() => {
     const listener = (messageData) => {
@@ -160,6 +191,8 @@ const ContextUserProvider = (props) => {
         allMessages,
         newRoom,
         joinAvalibleRoom,
+        whoIsTyping,
+        sendIsTyping,
       }}
     >
       {props.children}

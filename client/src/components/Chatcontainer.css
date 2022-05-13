@@ -1,5 +1,5 @@
 .chat-container {
-  min-height: calc(100vh - 144px);
+  min-height: calc(100vh - 198px);
   background-color: white;
   color: black;
   border-radius: 1rem;
@@ -10,12 +10,13 @@
   padding: 0.5rem;
   text-align: center;
   margin: 0;
-  background: #4eaca1;
-  border-radius: 1rem 1rem 0rem 0rem;
+  background: #4FACA1;
+  /* border-radius: 1rem 1rem 0rem 0rem; */
 }
 
 .roomDisplay p {
   margin: 0;
+  color: white;
 }
 
 .roomDisplay p:first-child {
@@ -27,15 +28,15 @@
 }
 
 .messageFeild {
-  bottom: 0;
-  background-color: #01776e;
-  display: flex;
-  height: 5rem;
-  flex-direction: row;
 
-  justify-content: flex-start;
-  padding-left: 1rem;
-  align-content: center;
+    background-color: #01776e;
+    display: flex;
+  
+    height: 4rem;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 1rem;
+    align-content: center;
 }
 
 .messageWithInfo {
@@ -53,7 +54,7 @@
 
 .chatBubble {
   width: 24rem;
-  background: #5d9dad;
+  background: #2A9376;
   border-radius: 1rem;
   margin-left: 3rem;
   position: relative;
@@ -79,7 +80,7 @@
   height: 2rem;
 }
 .chatInput button {
-  background-color: #5d9cad;
+  background-color: #2A9376;
   color: white;
   border: none;
   height: 2.1rem;
@@ -100,26 +101,29 @@
   height: 0;
   border-left: 1px solid transparent;
   border-right: 9px solid transparent;
-  border-bottom: 11px solid #5d9dad;
+  border-bottom: 11px solid #2A9376;
   transform: rotate(331deg);
   position: absolute;
   top: -7px;
   left: 1px;
 }
 
-.userBadge {
-  display: flex;
-  border-radius: 100%;
-  align-items: center;
-  flex-direction: column;
-  width: 4rem;
-  height: 4rem;
-  background: orange;
-  justify-content: center;
+.arrow-left-red {
+  width: 0;
+  height: 0;
+  border-left: 1px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 11px solid #4FACA1;
+  transform: rotate(331deg);
+  position: absolute;
+  top: -7px;
+  left: 1px;
 }
 
 .mapped-messages {
   overflow-y: scroll;
   scroll-behavior: smooth;
-  height: calc(100vh - 297px);
+    height: calc(100vh - 230px);
+    position: relative;
+
 }

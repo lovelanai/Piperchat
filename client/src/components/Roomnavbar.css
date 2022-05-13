@@ -8,7 +8,7 @@
 
 .roomsButtons:disabled {
   text-decoration: underline;
-  background-color: red;
+  background-color: #4FACA1;
   cursor: default;
 }
 
