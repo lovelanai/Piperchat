@@ -1,6 +1,8 @@
 # Piperchat
 
-Chatroom....
+This is a chatroom created with Socket.io, javascript & react.
+
+Users can join with a nickname, creat chatrooms, join chatrooms and chat with online people!
 
 [Link to repo](https://github.com/lovelanai/Piperchat)
 
