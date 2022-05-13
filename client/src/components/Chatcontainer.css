@@ -2,22 +2,22 @@
   min-height: calc(100vh - 198px);
   background-color: white;
   color: black;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+ border-radius: 5px;
 }
 
 .roomDisplay {
+      -webkit-box-shadow: 0 3px 5px rgb(57 63 72 / 30%);
+    -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+    box-shadow: 0 3px 5px rgb(57 63 72 / 30%);
   font-size: 2rem;
   padding: 0.5rem;
   text-align: center;
   margin: 0;
-  color: black;
 }
 
 .roomDisplay p {
   margin: 0;
-  color: rgb(2, 130, 93);
+  color: #334B48;
 }
 
 .roomDisplay p:first-child {
@@ -61,7 +61,7 @@
 
 .chatBubble p {
   max-width: 22rem;
-  margin: 1rem;
+  margin: 0.7rem;
   color: white;
   font-size: 1.2rem;
   white-space: pre-line;
@@ -70,11 +70,12 @@
 .chatInput input {
   text-overflow: auto;
   word-wrap: break-word;
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
   border: none;
   width: 100%;
   height: 2rem;
+  padding: 0.7rem;
 }
 
 .chatInput button {
@@ -83,8 +84,8 @@
   border: none;
   height: 2.1rem;
   font-size: 1.5rem;
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
   display: flex;
   align-items: center;
 }
@@ -109,12 +110,12 @@
   left: 1px;
 }
 
-.arrow-left-red {
+.arrow-left-me {
   width: 0;
   height: 0;
   border-left: 1px solid transparent;
   border-right: 9px solid transparent;
-  border-bottom: 11px solid #4faca1;
+  border-bottom: 11px solid #027281;
   transform: rotate(331deg);
   position: absolute;
   top: -7px;
@@ -126,4 +127,8 @@
   scroll-behavior: smooth;
   height: calc(100vh - 230px);
   position: relative;
+}
+
+.mapped-messages::-webkit-scrollbar {
+  display: none;
 }

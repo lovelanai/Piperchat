@@ -57,15 +57,15 @@ function Chatcontainer() {
                       style={{
                         fontSize: "2rem",
                         marginRight: "0.5rem",
-                        color: "#4FACA1",
+                        color: "#027281",
                       }}
                     >
                       <FaRegUserCircle />
                     </p>
                     <p>{message.from}</p>
                   </div>
-                  <div style={{ background: "#4FACA1" }} className="chatBubble">
-                    <div className="arrow-left-red"></div>
+                  <div style={{ background: "#007281" }} className="chatBubble">
+                    <div className="arrow-left-me"></div>
                     <p>{message.chatMessage} </p>
                   </div>
                 </div>
@@ -92,7 +92,9 @@ function Chatcontainer() {
             </div>
           ))}
           {whoIsTyping ? (
-            <div style={{ position: "absolute", left: "1rem" }}>
+            <div
+              style={{ position: "absolute", left: "1rem", color: "#334B48" }}
+            >
               <p>{whoIsTyping}</p>
             </div>
           ) : null}
